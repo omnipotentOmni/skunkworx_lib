@@ -261,43 +261,6 @@ export function render(el,children,target) {
   skunkworx.add(foundEl,target);
 }
 
-export function addScript(src) {
-
-  const script = document.createElement('script');
-  script.src = src;
-
-  document.body.appendChild(script);
-}
-
-export function addCSS(element,style) {
-
-  if (!element) {
-    let addStyle = document.createElement('style');
-    addStyle.textContent = style;
-    document.head.appendChild(addStyle);
-  }
-}
-
-// export function render(el,children,target) {
-//   let parentElement = skunkworx.loadComponent(el,elements);
-
-//   console.log(parentElement);
-
-//   if (children) {
-//     children.forEach(child => {
-
-//       //if the child is a single element
-//       if (typeof child === 'string') {
-//         console.log(child);
-//       }else if (Array.isArray(child)) {
-//         let parent = skunkworx.loadComponent(child[0],elements);
-//       }
-//     })
-//   }
-
-//   // skunkworx.add(parentElement,target);
-// }
-
 // BUILDS A GROUP OF OBJECTS ** MIGHT REMOVE
 // export function group(parent,children) {
 
@@ -461,6 +424,20 @@ export function swapView(swapToView,data) {
     exitView.remove();
   }, 500);
 
+}
+
+export function addScript(src) {
+  const script = document.createElement('script');
+  script.src = src;
+  document.body.appendChild(script);
+}
+
+export function addCSS(element,style) {
+  if (!element) {
+    let addStyle = document.createElement('style');
+    addStyle.textContent = style;
+    document.head.appendChild(addStyle);
+  }
 }
 
 function borderDash(element,settings) {
