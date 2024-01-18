@@ -40,7 +40,8 @@ export var viewData;
 const lit = {
   div : 'div',
   img : 'img',
-  script : 'script'
+  script : 'script',
+  span : 'span'
 }
 
 // SKUNKWORX FUNCTIONS
@@ -119,6 +120,13 @@ export function loadView(source) {
 export class div {
   constructor(properties) {
     this.element = skunkworx.build(lit.div);
+    assignProperties(this.element,properties);
+  }
+}
+
+export class span {
+  constructor(properties) {
+    this.element = skunkworx.build(lit.span);
     assignProperties(this.element,properties);
   }
 }
@@ -251,6 +259,23 @@ export function render(el,children,target) {
     })
   }
   skunkworx.add(foundEl,target);
+}
+
+export function addScript(src) {
+
+  const script = document.createElement('script');
+  script.src = src;
+
+  document.body.appendChild(script);
+}
+
+export function addCSS(element,style) {
+
+  if (!element) {
+    let addStyle = document.createElement('style');
+    addStyle.textContent = style;
+    document.head.appendChild(addStyle);
+  }
 }
 
 // export function render(el,children,target) {
