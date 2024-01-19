@@ -455,3 +455,6 @@ export function rgb(color,alpha) {
 
   return !alpha ? `rgb(${r},${g},${b})` : `rgba(${r},${g},${b},${alpha})`;
 }
+
+
+console.log('test');
