@@ -41,7 +41,8 @@ const lit = {
   div : 'div',
   img : 'img',
   script : 'script',
-  span : 'span'
+  span : 'span',
+  input : 'input'
 }
 
 // SKUNKWORX FUNCTIONS
@@ -121,6 +122,13 @@ export class div {
   constructor(properties) {
     this.element = skunkworx.build(lit.div);
     assignProperties(this.element,properties);
+  }
+}
+
+export class input {
+  constructor(properties) {
+    this.element = skunkworx.build(lit.input);
+    console.log(properties);
   }
 }
 
