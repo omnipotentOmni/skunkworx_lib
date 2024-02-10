@@ -128,7 +128,8 @@ export class div {
 export class input {
   constructor(properties) {
     this.element = skunkworx.build(lit.input);
-    console.log(properties);
+    assignProperties(this.element,properties);
+    
   }
 }
 
@@ -171,7 +172,8 @@ const componentTypes = {
   div : div,
   text : text,
   img : img,
-  modal : modal
+  modal : modal,
+  input : input
 }
 
 // CREATES A CUSTOMIZED INSTANCE OF AN OBJECT WITH A NEW SET OF PROPERTIES
@@ -212,8 +214,6 @@ export function getComp(element, options) {
     objType = element.type;
     objSettings = baseObj;
   }
-
-  console.log(objSettings);
 
   let newObj = skunkworx.build(objType);
   assignProperties(newObj,objSettings);
@@ -373,6 +373,7 @@ function assignProperties(el,props) {
 
     if(property === 'function') {
       let functionProperties = props.function;
+
       functionProperties.forEach(func => {
         let action = func[0];
         let addFunc = func[1];
