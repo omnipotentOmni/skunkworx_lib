@@ -230,12 +230,19 @@ export function group(parent, children) {
 
   let parentObj = getComp(parent);
 
+  if (typeof parent === 'string') {
+    parentObj = skunkworx.loadComponent(parent, elements);
+  }
+
   children.forEach(child => {
     let addChild;
     if (Array.isArray(child)) {
       addChild = getComp(child[0],child[1]);
     }else {
       addChild = getComp(child);
+    }
+    if (typeof child === 'string') {
+      addChild = skunkworx.loadComponent(child,elements);
     }
     parentObj.appendChild(addChild);
   })
@@ -245,7 +252,7 @@ export function group(parent, children) {
 
 // RENDERS OBJECT TO DOM
 export function render(el,children,target) {
-
+  
   const foundEl = typeof el === 'string' ? 
   skunkworx.loadComponent(el,elements) : 
   el;
@@ -257,8 +264,10 @@ export function render(el,children,target) {
         skunkworx.add(foundChild,foundEl);
       }else {
         if (Array.isArray(child)) {
+          console.log(child);
           let source = skunkworx.loadComponent(child[0],elements);
           let childGroup = group(child[0],child[1]);
+          console.log(childGroup);
           skunkworx.add(childGroup,foundEl);
           return;
         }
@@ -306,18 +315,20 @@ export function resProp(mobile,desktop) {
 // BUILDS VIEWS
 export let views = [];
 
-export function setView(viewName, layoutGroups) {
+export function setView(viewName, preDeploy, layoutGroups) {
   let view = {
     title : viewName,
     content : layoutGroups
   }
   views.push(view);
 
-  deployView(viewName);
+  if (preDeploy) {
+    deployView(viewName);
+  }
 }
 
 // RENDERS VIEWS TO DOM
-function deployView(viewName) {
+export function deployView(viewName) {
   const view = skunkworx.findView(views, viewName);
   view.content.forEach(object => {
 
